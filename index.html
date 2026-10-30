@@ -392,7 +392,7 @@ try{const lastFuel=localStorage.getItem(fuelPrefKey);if(['GPL','Benzina','Diesel
 function liveFuelTotal(){const l=Number(fuelForm.elements.liters.value),p=Number(fuelForm.elements.price.value);document.querySelector('#fuelLiveTotal strong').textContent=l>0&&p>=0&&fuelForm.elements.price.value!==''?money(l*p):'—'}
 fuelForm.addEventListener('input',liveFuelTotal);
 fuelForm.addEventListener('change',liveFuelTotal);
-fuelForm.addEventListener('submit',()=>{const fuel=fuelForm.elements.type.value;try{localStorage.setItem(fuelPrefKey,fuel)}catch(e){};setTimeout(()=>{fuelForm.elements.type.value=fuel;liveFuelTotal()},0)});
+fuelForm.addEventListener('submit',()=>{const fuel=fuelForm.elements.type.value;try{localStorage.setItem(fuelPrefKey,fuel)}catch(e){};setTimeout(()=>{fuelForm.elements.type.value=fuel;liveFuelTotal()},0)},true);
 function v16Icons(){document.querySelectorAll('.nav button').forEach((b,i)=>{const names=['home','fuel','wrench','calendar','more'];const el=b.querySelector('b');if(el&&names[i])el.innerHTML=v14Svg(names[i])});}
 const v16Render=render;render=function(){v16Render();applyHomeLayout();v16Icons();liveFuelTotal()};
 render();
