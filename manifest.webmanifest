@@ -1,0 +1,18 @@
+{
+  "name": "Auto Manager",
+  "short_name": "Auto Manager",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#f5f7fa",
+  "description": "Gestione locale di auto, rifornimenti e manutenzioni",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
