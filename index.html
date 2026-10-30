@@ -56,6 +56,60 @@ header .eyebrow{color:#0a9d8b}
 @media(min-width:550px){.app{padding-left:26px;padding-right:26px}}
 @media(max-width:380px){.card{padding:17px}.hero .big{font-size:35px}.metric{padding:12px;min-height:92px}.metric strong{font-size:19px}}
 @media(prefers-reduced-motion:no-preference){.section.active>.card{animation:rise .28s ease both}@keyframes rise{from{opacity:.7;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}}
+</style><style id="micro-polish">
+/* Compact controls, consistent visual rhythm and touch-friendly mobile details */
+:root{--radius-sm:12px;--radius-md:16px;--accent:#079d88}
+*{-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}body{font-size:14px;-webkit-font-smoothing:antialiased}
+button,select,input,textarea{transition:border-color .16s,background-color .16s,box-shadow .16s,transform .12s}
+button:focus-visible,.listrow[onclick]:focus-visible{outline:3px solid #0aaf9870;outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card .topline{gap:8px}.topline h2{line-height:1.2}
+.card .topline>.secondary{font-size:12px;min-height:35px;padding:8px 11px;border-radius:11px}
+.label{margin:14px 0 6px}
+.field{border-radius:12px;padding:12px 13px}
+textarea.field{line-height:1.5}
+.field::placeholder{color:#a3adba}
+input[type=date],input[type=number]{font-variant-numeric:tabular-nums}
+select.field{padding-right:27px}
+.card form>.primary{margin-top:14px}
+.card .actions{gap:9px}
+.card .actions button{white-space:normal;line-height:1.2}
+#home>.card:nth-of-type(2) .actions{display:grid;grid-template-columns:1fr 1fr}
+#home>.card:nth-of-type(2) .actions button{font-size:13px;padding:12px 8px}
+.listrow .secondary.danger{border-color:#f5e0e0;background:#fff7f7;color:#bd5555;font-size:11px!important;font-weight:700}
+.listrow .secondary.danger:active{background:#ffe8e8}
+.listrow .muted{line-height:1.5}
+.listrow>div:first-child{min-width:0;overflow-wrap:anywhere}
+.listrow>div:last-child{flex-shrink:0}
+.pill{letter-spacing:.05px;white-space:normal;text-align:center;line-height:1.3}
+.seg{scrollbar-width:none;scroll-snap-type:x proximity;gap:7px}
+.seg::-webkit-scrollbar{display:none}
+.seg button{scroll-snap-align:start;padding:9px 12px;min-height:36px;white-space:nowrap}
+#filters{margin-bottom:2px}
+#fuels button{min-width:75px}
+.metric .small,.metric .muted{font-size:11px;line-height:1.35}
+.metric strong{line-height:1.15}
+#analysisHint{margin:14px 0 5px}
+#chart{border-radius:12px;background:linear-gradient(180deg,#fbfdfd,#fff);margin-top:5px}
+#calendar{gap:5px!important}
+#calendar>b{font-size:11px;color:#8694a7}
+#calendar>div{font-variant-numeric:tabular-nums;min-height:38px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-weight:600}
+#calendar>div div{line-height:7px;font-size:15px}
+#more .listrow{cursor:pointer;transition:background .16s,transform .16s}
+#more .listrow:active{background:#ecf4f6;transform:scale(.99)}
+.nav button{position:relative;line-height:1.15}
+.navinner{gap:1px}
+.nav button b{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.nav button.active:after{content:"";position:absolute;bottom:1px;width:16px;height:3px;background:#09ac94;border-radius:4px}
+#historyFilter{max-width:135px;font-size:12px;min-height:37px;padding:8px}
+#monthTitle{text-align:center;font-size:16px;text-transform:capitalize}
+#deadlines .topline>.secondary{font-size:22px;min-width:42px}
+#fuelForm .hint{background:#effaf7;border:1px solid #d9f0e9;padding:12px;border-radius:12px;color:#52786f}
+#maintenanceForm .hint,#vehicleForm .hint{background:#f4f7fc;padding:12px;border-radius:12px}
+@media(max-width:390px){.app{padding-left:13px;padding-right:13px}.card{padding:16px;border-radius:20px}.card h2{font-size:17px}.hero{padding:19px}.hero .big{font-size:34px}.metric{padding:12px}.metric strong{font-size:19px}.nav button{font-size:9px}.nav button b{font-size:20px}.field{padding:11px 10px}.card .actions button{font-size:12px}}
+@media(max-width:340px){.grid{gap:8px}.card{padding:13px}.metric strong{font-size:17px}.nav button{font-size:8px}.nav button.active b{min-width:34px}.section>h2{font-size:22px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style></head><body><div class="toast" id="toast"></div><main class="app"><header><div><div class="eyebrow">IL TUO GARAGE</div><h1 id="heading">Auto Manager</h1></div><button class="secondary" onclick="navigate('vehicle')" aria-label="Profilo veicolo">⚙</button></header>
 <section id="home" class="section active"><div class="card hero"><div class="topline"><strong id="carTitle">Il tuo veicolo</strong><span class="pill">ATTIVO</span></div><div class="muted small">Chilometraggio attuale</div><div class="big"><span id="currentKm">—</span> <span style="font-size:15px">km</span></div><button class="secondary" onclick="updateOdometer()">✎ Aggiorna km</button></div><div class="card"><h2>Azioni rapide</h2><div class="actions"><button class="primary" onclick="navigate('fuel')">+ Rifornimento</button><button class="secondary" onclick="navigate('maintenance')">+ Manutenzione</button></div></div><div class="card"><div class="topline"><h2>Prossimi 30 giorni</h2><button class="secondary" onclick="navigate('deadlines')">Calendario</button></div><div id="urgent"></div></div><div class="card"><h2>Analisi consumi</h2><div class="seg" id="filters"></div><div class="seg" id="fuels"></div><div class="grid"><div class="metric"><span class="muted small">L / 100 km</span><strong id="l100">—</strong></div><div class="metric"><span class="muted small">km / L</span><strong id="kml">—</strong></div><div class="metric"><span class="muted small">Km analizzati</span><strong id="analysisKm">—</strong></div><div class="metric"><span class="muted small">Costo carburante</span><strong id="analysisCost">—</strong></div></div><p class="hint" id="analysisHint">I consumi richiedono pieni validi dello stesso carburante.</p><canvas id="chart" width="620" height="155" aria-label="Grafico consumi"></canvas></div></section>
 <section id="fuel" class="section"><h2>Rifornimenti</h2><div class="card"><form id="fuelForm"><div class="grid"><div><label class="label">Carburante</label><select class="field" name="type"><option>GPL</option><option>Benzina</option><option>Diesel</option></select></div><div><label class="label">Data</label><input class="field" name="date" type="date" required></div><div><label class="label">Contachilometri</label><input class="field" name="km" type="number" min="0" step="1" required></div><div><label class="label">Litri</label><input class="field" name="liters" type="number" min=".01" step=".01" required></div><div><label class="label">Prezzo €/L</label><input class="field" name="price" type="number" min="0" step=".001" required></div><div><label class="label">Tipo</label><select class="field" name="full"><option value="true">Pieno completo</option><option value="false">Parziale</option></select></div></div><p class="hint">Consumo calcolato tra pieni completi consecutivi dello stesso carburante. I parziali intermedi sono sommati.</p><button class="primary" type="submit" style="width:100%">Salva rifornimento</button></form></div><div class="card"><h2>Storico rifornimenti</h2><div id="fuelList"></div></div></section>
