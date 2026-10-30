@@ -118,7 +118,7 @@ select.field{padding-right:27px}
 #editOverlay{position:fixed;inset:0;background:#10223788;backdrop-filter:blur(5px);z-index:30;display:none;align-items:flex-end;justify-content:center;padding:12px 12px max(12px,env(safe-area-inset-bottom))}
 #editOverlay.open{display:flex}#editSheet{background:white;border-radius:24px;width:min(540px,100%);max-height:90dvh;overflow:auto;padding:22px;box-shadow:0 20px 60px #11223744}#editSheet h2{margin-bottom:5px}#editSheet .grid{gap:9px}#editSheet .field{min-width:0}
 @media(max-width:380px){.money-tile{padding:12px}.money-tile strong{font-size:17px}}
-</style><meta name="app-version" content="2026.10.30.6"><style id="v14-premium">
+</style><meta name="app-version" content="2026.10.30.7"><style id="v14-premium">
 :root{--shadow-soft:0 12px 34px rgba(21,42,63,.06)}
 .card{box-shadow:var(--shadow-soft)}.card h2{letter-spacing:-.55px}
 .dashboard-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
@@ -239,6 +239,28 @@ button:active{transform:scale(.97)}
 .empty{border-radius:15px;background:#f6f9fb;padding:17px}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 @media(min-width:600px){#backupPreview{align-items:center}}
+</style><style id="v18-mobile-stability">
+html{-webkit-text-size-adjust:100%;scroll-padding-top:20px}
+body{overscroll-behavior-y:contain}
+button,.nav button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+input,select,textarea{font-size:16px!important;min-height:44px}
+input[type=checkbox]{min-height:initial}
+button{min-height:43px}
+.nav{padding-bottom:env(safe-area-inset-bottom);z-index:25}
+.navinner{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+.nav button{min-width:0;min-height:59px;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;white-space:nowrap}
+.nav button b{display:flex;align-items:center;justify-content:center;min-height:26px}
+.nav .ui-svg{width:23px;height:23px}
+.card{overflow-wrap:anywhere}
+.actions{flex-wrap:wrap}
+.actions button{flex:1 1 125px}
+.section{scroll-margin-top:10px}
+.field{max-width:100%}
+#fuelForm .grid,#maintenanceForm .grid,#expenseForm .grid{gap:12px}
+#fuelForm button[type=submit],#maintenanceForm button[type=submit],#expenseForm button[type=submit]{min-height:52px}
+#homeCustomizer .custom-sheet,#backupPreview .backup-sheet{padding-bottom:max(22px,env(safe-area-inset-bottom))}
+@media(max-width:360px){.app{padding-left:12px;padding-right:12px}.nav button{font-size:9px}.nav .ui-svg{width:21px;height:21px}.card{padding:15px}.seg{overflow-x:auto;scrollbar-width:none}.seg button{flex-shrink:0}}
+@media(prefers-color-scheme:dark){:root{color-scheme:light}}
 </style></head><body><div class="toast" id="toast"></div><main class="app"><header><div><div class="eyebrow">IL TUO GARAGE</div><h1 id="heading">Auto Manager</h1></div><button class="secondary" onclick="navigate('vehicle')" aria-label="Profilo veicolo">⚙</button></header>
 <section id="home" class="section active"><div class="card hero"><div class="topline"><strong id="carTitle">Il tuo veicolo</strong><span class="pill">ATTIVO</span></div><div class="muted small">Chilometraggio attuale</div><div class="big"><span id="currentKm">—</span> <span style="font-size:15px">km</span></div><button class="secondary" onclick="updateOdometer()">✎ Aggiorna km</button></div><div class="home-customize"><button type="button" id="customizeHomeBtn" class="secondary">Personalizza Home</button></div><div class="card" id="quickActions"><h2>Azioni rapide</h2><div class="actions"><button class="primary" onclick="navigate('fuel')">+ Rifornimento</button><button class="secondary" onclick="navigate('maintenance')">+ Manutenzione</button></div></div><div class="card" id="homeDeadlines"><div class="topline"><h2>Scadenze e manutenzioni</h2><button class="secondary" onclick="navigate('deadlines')">Agenda</button></div><div id="urgent"></div></div><div class="card" id="homeConsumption"><h2>Analisi consumi</h2><div class="seg" id="filters"></div><div class="seg" id="fuels"></div><div class="grid"><div class="metric"><span class="muted small">L / 100 km</span><strong id="l100">—</strong></div><div class="metric"><span class="muted small">km / L</span><strong id="kml">—</strong></div><div class="metric"><span class="muted small">Km analizzati</span><strong id="analysisKm">—</strong></div><div class="metric"><span class="muted small">Costo carburante</span><strong id="analysisCost">—</strong></div><div class="metric"><span class="muted small">Costo / 100 km</span><strong id="cost100">—</strong></div><div class="metric"><span class="muted small">Prezzo medio / L</span><strong id="avgLiterPrice">—</strong></div></div><p class="hint" id="analysisHint">I consumi richiedono pieni validi dello stesso carburante.</p><canvas id="chart" width="620" height="155" aria-label="Grafico consumi"></canvas></div><div class="card" id="serviceOverview"><h2>Stato manutenzioni</h2><div id="serviceProgress"></div></div><div class="card" id="financeOverview"><div class="topline"><h2>Le tue spese</h2><span class="pill">PANORAMICA</span></div><div class="seg" id="financeFilters"></div><div id="financeMetrics"></div></div><div class="card" id="costPerKmOverview"><div class="dashboard-heading"><div><h2>Costo reale per km</h2><div class="dashboard-subtitle">Spese e percorrenza nello stesso periodo</div></div><span class="dash-chip">€/KM</span></div><div class="seg" id="costKmFilters"></div><div id="costKmMetrics"></div></div><div class="card" id="odometerOverview"><div class="dashboard-heading"><div><h2>Andamento chilometrico</h2><div class="dashboard-subtitle">Evoluzione delle letture registrate</div></div><span class="dash-chip">KM</span></div><div class="seg" id="projectionFilters"></div><div id="odometerStats"></div><canvas id="odometerChart" class="dashboard-graph" width="620" height="170"></canvas><p class="dashboard-chart-caption">Dati basati sulle letture e sui chilometraggi associati alle registrazioni; non è una misurazione GPS.</p></div></section>
 <section id="fuel" class="section"><h2>Rifornimenti</h2><div class="card"><div class="dashboard-heading"><div><h2>Rifornimento rapido</h2><div class="dashboard-subtitle">Totale calcolato mentre inserisci i dati</div></div><span class="dash-chip">VELOCE</span></div><form id="fuelForm"><div class="grid"><div><label class="label">Carburante</label><select class="field" name="type"><option>GPL</option><option>Benzina</option><option>Diesel</option></select></div><div><label class="label">Data</label><input class="field" name="date" type="date" required></div><div><label class="label">Contachilometri</label><input class="field" name="km" type="number" min="0" step="1" required></div><div><label class="label">Litri</label><input class="field" name="liters" type="number" min=".01" step=".01" required></div><div><label class="label">Prezzo €/L</label><input class="field" name="price" type="number" min="0" step=".001" required></div><div><label class="label">Tipo</label><select class="field" name="full"><option value="true">Pieno completo</option><option value="false">Parziale</option></select></div></div><div id="fuelLiveTotal" class="fuel-live-total" aria-live="polite"><span>Totale rifornimento</span><strong>—</strong></div><p class="hint">Consumo calcolato tra pieni completi consecutivi dello stesso carburante. I parziali intermedi sono sommati.</p><button class="primary" type="submit" style="width:100%">Salva rifornimento</button></form></div><div class="card"><h2>Storico rifornimenti</h2><div id="fuelList"></div></div></section>
@@ -449,4 +471,20 @@ document.getElementById('importFile').addEventListener('change',async e=>{const 
 document.getElementById('confirmBackup').addEventListener('click',()=>{if(!pendingBackup)return;const incoming=pendingBackup;const previous=db;try{localStorage.setItem(KEY,JSON.stringify(incoming));db=incoming;pendingBackup=null;preview.classList.remove('open');render();toast('Backup importato correttamente')}catch(e){db=previous;alert('Importazione interrotta: spazio di archiviazione insufficiente o accesso negato. I dati precedenti sono rimasti invariati.')}});
 const v17Render=render;render=function(){v17Render();costKmRender()};
 render();
+</script><script id="v18-stability-mobile">
+/* Validate data before the existing submit handlers mutate the archive. */
+const v18NumericRules={fuelForm:{km:[0,99999999],liters:[0.01,1000],price:[0,100]},maintenanceForm:{km:[0,99999999],cost:[0,10000000],intervalKm:[0,1000000],intervalMonths:[0,1200]},deadlineForm:{months:[0,1200],cost:[0,10000000]},expenseForm:{cost:[0,10000000],km:[0,99999999]},vehicleForm:{initialKm:[0,99999999]}};
+for(const [id,rules] of Object.entries(v18NumericRules)){const form=document.getElementById(id);if(!form)continue;form.addEventListener('submit',e=>{for(const [key,[min,max]] of Object.entries(rules)){const field=form.elements.namedItem(key);if(!field||field.value==='')continue;const n=Number(field.value);if(!Number.isFinite(n)||n<min||n>max){e.preventDefault();e.stopImmediatePropagation();field.setCustomValidity('Inserisci un valore compreso tra '+min+' e '+max);field.reportValidity();field.focus();return}field.setCustomValidity('')}
+const date=form.elements.namedItem('date');if(date&&date.value&&!/^\d{4}-\d{2}-\d{2}$/.test(date.value)){e.preventDefault();e.stopImmediatePropagation();date.setCustomValidity('Data non valida');date.reportValidity()}
+},true);
+for(const field of form.querySelectorAll('input'))field.addEventListener('input',()=>field.setCustomValidity(''))}
+/* Mobile numeric keyboard: retain decimals on prices and volumes. */
+for(const el of document.querySelectorAll('input[type=number]')){el.setAttribute('inputmode',el.step==='1'?'numeric':'decimal');el.setAttribute('autocomplete','off')}
+for(const el of document.querySelectorAll('input[type=date]'))el.setAttribute('autocomplete','off');
+/* Warn before a duplicate identical refueling entry, without blocking legitimate same-day refuels. */
+document.getElementById('fuelForm')?.addEventListener('submit',e=>{const f=e.currentTarget,v=Object.fromEntries(new FormData(f));const same=db.fuels.some(x=>x.date===v.date&&Number(x.km)===Number(v.km)&&x.type===v.type&&Math.abs(Number(x.liters)-Number(v.liters))<0.001&&Math.abs(Number(x.price)-Number(v.price))<0.0001);if(same&&!confirm('Questo rifornimento sembra già registrato. Vuoi salvarlo comunque?')){e.preventDefault();e.stopImmediatePropagation()}},true);
+/* Preserve scroll accessibility and make dialogs keyboard-dismissable. */
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const backup=document.getElementById('backupPreview');if(backup?.classList.contains('open')){document.getElementById('cancelBackup')?.click();return}const customize=document.getElementById('homeCustomizer');if(customize?.classList.contains('open'))document.getElementById('closeCustomizer')?.click()});
+/* Make a manual copy easy to find after data edits. */
+const backupSafety=document.getElementById('backupSafety');if(backupSafety){const reminder=document.createElement('p');reminder.textContent='Suggerimento: salva periodicamente il JSON nell’app File o su iCloud Drive. I dati dell’app restano memorizzati su questo dispositivo.';backupSafety.appendChild(reminder)}
 </script></body></html>
